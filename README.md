@@ -42,7 +42,7 @@ pdf_parser_project/
 │   ├── amex_extractor.py
 │   ├── citi_extractor.py
 │   ├── hdfc_extractor.py
-│   └── sbi_extractorpy
+│   └── sbi_extractor.py
 │
 ├── requirements.txt    # Dependencies list
 └── README.md           # Documentation
