@@ -112,27 +112,6 @@ A file picker will appear. Choose any credit card statement PDF, and the script 
 
 -----
 
-## 🧑‍💻 Extending the Project
-
-To add support for a new bank or issuer:
-
-1.  Create a new parser file in `/parsers/` (e.g., `icici_parser.py`).
-
-2.  Implement a function:
-
-    ```python
-    def parse_icici(text):
-        data = {
-            "card_variant": "...",
-            "billing_cycle": "...",
-            # ...
-        }
-        return data
-    ```
-
-3.  Register it in `parser.py` under the `parsers` dictionary.
-
------
 
 ## 💬 Author
 
