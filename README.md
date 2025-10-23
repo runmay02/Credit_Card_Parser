@@ -1,30 +1,41 @@
-Here is the content structured as a professional `README.md` file, ready to be copied and pasted.
+# 🧾 Credit Card Statement PDF Parser
+
+A Python-based tool that automatically extracts key information from credit card statement PDFs for major issuers such as **Chase, Amex, Citi, HDFC, and SBI**.
+It works on both **text-based PDFs** and **scanned PDFs** (via OCR fallback).
 
 -----
 
-# 🧾 PDF Statement Parser
+## 📌 Features
 
-This project is a **Python-based PDF statement parser** that automatically extracts, analyzes, and summarizes key details (like billing info, balances, issuer details, etc.) from credit card statements.
-It supports multiple issuers (Chase, Amex, Citi, HDFC, and SBI) and includes OCR fallback for scanned PDFs.
+✅ Supports **5 major issuers**
+
+  - Chase
+  - American Express
+  - Citi
+  - HDFC Bank
+  - SBI Card
+
+✅ Extracts **5 Key Data Points**
+
+  - Card Variant
+  - Card Last 4 Digits
+  - Billing Cycle
+  - Payment Due Date
+  - Total/New Balance
+
+✅ Supports **real-world PDFs**
+✅ **OCR fallback** for scanned statements
+✅ **Interactive PDF selection** (no manual path input)
+✅ Outputs **clean JSON data**
 
 -----
 
-## 🚀 Features
-
-  - 📂 **Interactive file upload:** Select a PDF file via a file picker (no need to type paths).
-  - 🧠 **Automatic issuer detection:** Identifies the credit card issuer (Chase, Amex, Citi, HDFC, SBI).
-  - 🔍 **Text extraction:** Uses `pdfplumber` for text-based PDFs and `pytesseract` OCR for scanned ones.
-  - 🧾 **Custom parsers:** Each issuer has its own parser logic for structured data extraction.
-  - 💡 **Rich JSON output:** Displays formatted JSON with extracted information.
-
------
-
-## 📁 Folder Structure
+## 🗂️ Folder Structure
 
 ```plaintext
 pdf_pro/
 │
-├── parser.py           # Main script to run the parser
+├── parser.py           # Main application file
 │
 ├── /parsers/           # Individual issuer parsers
 │   ├── chase_parser.py
@@ -33,22 +44,22 @@ pdf_pro/
 │   ├── hdfc_parser.py
 │   └── sbi_parser.py
 │
-├── /requirements.txt   # Required dependencies
-└── /README.md          # Documentation
+├── requirements.txt    # Dependencies list
+└── README.md           # Documentation
 ```
 
 -----
 
 ## ⚙️ Installation
 
-### 1️⃣ Clone the repository
+### Step 1: Clone or Download Repository
 
 ```bash
-git clone https://github.com/your-username/pdf_pro.git
+git clone https://github.com/yourusername/pdf_pro.git
 cd pdf_pro
 ```
 
-### 2️⃣ Create and activate a virtual environment
+### Step 2: Create Virtual Environment
 
 ```bash
 python -m venv venv
@@ -60,49 +71,59 @@ venv\Scripts\activate
 source venv/bin/activate
 ```
 
-### 3️⃣ Install dependencies
+### Step 3: Install Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 🧩 Dependencies
+If you plan to use OCR (for scanned PDFs), also install:
 
-The following Python libraries are required:
+```bash
+pip install pytesseract pdf2image pillow
+```
 
-  - `pdfplumber` — Extracts text from text-based PDFs
-  - `pytesseract` — Performs OCR on scanned PDFs (optional)
-  - `pdf2image` — Converts PDF pages to images for OCR
-  - `Pillow` — Required by `pdf2image`
-  - `rich` — Displays pretty JSON output
-  - `tkinter` — Used for file picker (comes with Python standard library)
+### 🧩 External Setup (Optional for OCR)
+
+🖼️ **Poppler**
+
+  - **Windows:**
+      - Download from [Poppler for Windows](https://github.com/oschwartz10612/poppler-windows)
+      - Extract and add the `bin` folder to your system `PATH`.
+      - *Example PATH: `C:\poppler-24.07.0\Library\bin`*
+
+🔠 **Tesseract OCR**
+
+  - **Windows:**
+      - Download from [Tesseract OCR Releases](https://www.google.com/search?q=https://github.com/UB-Mannheim/tesseract/wiki)
+      - Add the installation path (e.g., `C:\Program Files\Tesseract-OCR`) to your system `PATH`.
 
 -----
 
-## 🧠 Usage
+## 🚀 Usage
 
-Run the script:
+Run the Parser:
 
 ```bash
 python parser.py
 ```
 
-A file picker will appear. Choose any credit card statement PDF, and the script will:
+A file picker window will open — select the credit card statement PDF you want to parse.
 
-1.  Extract text (or OCR scanned PDFs)
-2.  Detect the issuer
-3.  Parse structured data
-4.  Display results in JSON format
+Then, the tool will:
 
------
+1.  Detect the issuer automatically
+2.  Extract relevant data points
+3.  Display results as formatted JSON
 
-## 🧾 Example Output
+### 🧾 Example Output
 
 ```json
 {
   "card_variant": "REWARDS",
+  "card_last4": "1234",
   "billing_cycle": "12/03/18 - 01/01/19",
-  "payment_due_date": "27",
+  "payment_due_date": "01/25/2019",
   "new_balance": "1,245.00",
   "issuer": "chase",
   "used_ocr": false,
@@ -112,9 +133,51 @@ A file picker will appear. Choose any credit card statement PDF, and the script 
 
 -----
 
+## 🧠 How It Works
 
-## 💬 Author
+1.  User selects PDF file via GUI.
+2.  Text extraction attempted via `pdfplumber`.
+3.  If extraction fails → OCR using `pdf2image` + `pytesseract`.
+4.  Issuer detected using keyword search.
+5.  Issuer-specific parser extracts target fields.
+6.  Results displayed in JSON format.
 
-  - **Your Name**
-  - 📧 `runmaystudy@gmail.com`
-  - 💻 **GitHub:** `runmay02`
+### 🔍 Error Handling
+
+| Scenario | Action |
+| :--- | :--- |
+| Invalid or missing file | Shows error message |
+| Scanned PDF | Automatically switches to OCR |
+| Unsupported issuer | Returns `"issuer": "unknown"` |
+| Missing libraries | Displays clear installation hint |
+
+-----
+
+## 🧮 Dependencies
+
+| Library | Purpose |
+| :--- | :--- |
+| `pdfplumber` | Text extraction from PDFs |
+| `pytesseract` | OCR for scanned PDFs |
+| `pdf2image` | Converts PDF to image for OCR |
+| `Pillow` | Image processing |
+| `rich` | Colored JSON output |
+| `tkinter` | GUI for file selection |
+
+-----
+
+## 💡 Future Enhancements
+
+  - Add more issuers (Axis, ICICI, etc.)
+  - Build a web UI with Flask
+  - Add summary report generation
+  - Integrate with finance management tools
+
+-----
+
+## 👨‍💻 Author
+
+  - **Developed by:** Runmay
+  - **Course:** M.Sc. Computer Science
+  - **Subject:** Cyber Security and Laws / Data Extraction Project
+  - **Submission Date:** 23rd October
