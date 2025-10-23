@@ -56,7 +56,7 @@ pdf_parser_project/
 
 ```bash
 git clone https://github.com/yourusername/pdf_pro.git
-cd pdf_pro
+cd pdf_parser_project
 ```
 
 ### Step 2: Create Virtual Environment
