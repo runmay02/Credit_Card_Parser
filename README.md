@@ -179,5 +179,4 @@ Then, the tool will:
 
   - **Developed by:** Runmay
   - **Course:** M.Sc. Computer Science
-  - **Subject:** Cyber Security and Laws / Data Extraction Project
   - **Submission Date:** 23rd October
