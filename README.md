@@ -33,16 +33,16 @@ It works on both **text-based PDFs** and **scanned PDFs** (via OCR fallback).
 ## 🗂️ Folder Structure
 
 ```plaintext
-pdf_pro/
+pdf_parser_project/
 │
-├── parser.py           # Main application file
+├── main_processor.py           # Main application file
 │
 ├── /parsers/           # Individual issuer parsers
-│   ├── chase_parser.py
-│   ├── amex_parser.py
-│   ├── citi_parser.py
-│   ├── hdfc_parser.py
-│   └── sbi_parser.py
+│   ├── chase_extractor.py
+│   ├── amex_extractor.py
+│   ├── citi_extractor.py
+│   ├── hdfc_extractor.py
+│   └── sbi_extractorpy
 │
 ├── requirements.txt    # Dependencies list
 └── README.md           # Documentation
